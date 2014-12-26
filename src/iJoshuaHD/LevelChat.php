@@ -28,17 +28,17 @@ class LevelChat extends PluginBase implements Listener{
 		$p = $ev->getPlayer();
 		$recipients = $ev->getRecipients();
 		$array = [];
-		foreach($recipients as $m => $t){
+		foreach($recipients as $t){
 			if($t instanceof Player){
-				if($p->getLevel() !== $t->getLevel()){
-					$array[] = $m;
-					foreach($array as $messages){
-						unset($recipients[$m]);
-						$ev->setRecipients(array_values($recipients));
-					}
+				if($p->getLevel() === $t->getLevel()){
+					$array[] = $t;
 				}
+			}else{
+				$array[] = $t;
 			}
 		}
+		$ev->setRecipients($array);
+		
 	}
 	
 }
